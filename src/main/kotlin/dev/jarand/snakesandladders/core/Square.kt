@@ -1,0 +1,16 @@
+package dev.jarand.snakesandladders.core
+
+class Square(val id: Int, val players: MutableList<Player>) {
+
+    fun addPlayer(player: Player) {
+        players.add(player)
+    }
+
+    fun removePlayer(player: Player) {
+        players.remove(player)
+    }
+
+    fun hasPlayers(): Boolean {
+        return players.isNotEmpty()
+    }
+}
