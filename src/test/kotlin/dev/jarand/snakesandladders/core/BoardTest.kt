@@ -38,16 +38,33 @@ class BoardTest {
     fun `move to start square should invoke expected methods`() {
         board.movePlayerToStart(player = playerMock)
 
-        verify { startSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 1) { startSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 0) { startSquareMock.removePlayer(player = playerMock) }
+        verify(exactly = 0) { endSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 0) { endSquareMock.removePlayer(player = playerMock) }
     }
 
     @Test
     fun `move to end square should invoke expected methods`() {
         every { startSquareMock.players } returns mutableListOf(playerMock)
 
-        board.movePlayerToSquare(player = playerMock, square = endSquareMock)
+        board.movePlayer(player = playerMock, moves = 1)
 
-        verify { startSquareMock.removePlayer(player = playerMock) }
-        verify { endSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 0) { startSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 1) { startSquareMock.removePlayer(player = playerMock) }
+        verify(exactly = 1) { endSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 0) { endSquareMock.removePlayer(player = playerMock) }
+    }
+
+    @Test
+    fun `move beyond end square should invoke expected methods`() {
+        every { startSquareMock.players } returns mutableListOf(playerMock)
+
+        board.movePlayer(player = playerMock, moves = 2)
+
+        verify(exactly = 0) { startSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 0) { startSquareMock.removePlayer(player = playerMock) }
+        verify(exactly = 0) { endSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 0) { endSquareMock.removePlayer(player = playerMock) }
     }
 }

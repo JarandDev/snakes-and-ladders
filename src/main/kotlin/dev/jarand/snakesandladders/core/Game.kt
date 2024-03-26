@@ -42,17 +42,12 @@ class Game(squareCount: Int, playerCount: Int) {
         println("[Game] Playing round ($rounds)")
         players.forEach { player ->
             val moves = dice.roll()
-            val square = board.getSquare(player = player)
-            if (square.id + moves <= board.getEndSquare().id) {
-                board.movePlayerToSquare(player = player, square = board.getSquare(square.id + moves))
-            } else {
-                println("[Game] Player (${player.name}) skipped move because it would be out of board")
-            }
+            board.movePlayer(player = player, moves = moves)
         }
     }
 
     fun hasRemainingRounds(): Boolean {
-        return state == GameState.SETUP_COMPLETE || state == GameState.RUNNING
+        return state == GameState.RUNNING
     }
 
     fun hasEnded(): Boolean {

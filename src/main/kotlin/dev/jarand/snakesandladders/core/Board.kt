@@ -27,10 +27,16 @@ class Board(private val squares: List<Square>) {
         println("[Board] Player (${player.name}) moved to start square")
     }
 
-    fun movePlayerToSquare(player: Player, square: Square) {
+    fun movePlayer(player: Player, moves: Int) {
         val currentSquare = squares.first { it.players.contains(player) }
+        val targetSquareId = currentSquare.id + moves
+        if (targetSquareId > getEndSquare().id) {
+            println("[Board] Player (${player.name}) can not move ($moves) moves because it would be out of board")
+            return
+        }
+        val targetSquare = squares[targetSquareId - 1]
         currentSquare.removePlayer(player)
-        square.addPlayer(player)
-        println("[Board] Player (${player.name}) moved from square (${currentSquare.id}) to (${square.id})")
+        targetSquare.addPlayer(player)
+        println("[Board] Player (${player.name}) moved ($moves) moves from square (${currentSquare.id}) to (${targetSquare.id})")
     }
 }
