@@ -57,6 +57,18 @@ class BoardTest {
     }
 
     @Test
+    fun `move by ladder to end square should invoke expected methods`() {
+        every { startSquareMock.players } returns mutableListOf(playerMock)
+
+        board.movePlayerByLadder(player = playerMock, ladder = Ladder(start = 1, end = 2))
+
+        verify(exactly = 0) { startSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 1) { startSquareMock.removePlayer(player = playerMock) }
+        verify(exactly = 1) { endSquareMock.addPlayer(player = playerMock) }
+        verify(exactly = 0) { endSquareMock.removePlayer(player = playerMock) }
+    }
+
+    @Test
     fun `move beyond end square should invoke expected methods`() {
         every { startSquareMock.players } returns mutableListOf(playerMock)
 

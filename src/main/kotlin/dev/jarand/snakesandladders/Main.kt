@@ -1,9 +1,20 @@
 package dev.jarand.snakesandladders
 
 import dev.jarand.snakesandladders.core.Game
+import dev.jarand.snakesandladders.generator.BoardGenerator
+import dev.jarand.snakesandladders.generator.PlayerGenerator
 
 fun main() {
-    val game = Game(squareCount = 100, playerCount = 2)
+    val squareCount = 100
+    val playerCount = 2
+
+    val boardGenerator = BoardGenerator(squareCount = squareCount)
+    val playerGenerator = PlayerGenerator(playerCount = playerCount)
+
+    val board = boardGenerator.generate()
+    val players = playerGenerator.generate()
+
+    val game = Game(board = board, players = players)
 
     game.setup()
 

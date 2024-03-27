@@ -1,6 +1,6 @@
 package dev.jarand.snakesandladders.core
 
-class Board(private val squares: List<Square>) {
+class Board(val squares: List<Square>) {
 
     init {
         println("[Board] Initialized board with (${squares.size}) squares")
@@ -38,5 +38,13 @@ class Board(private val squares: List<Square>) {
         currentSquare.removePlayer(player)
         targetSquare.addPlayer(player)
         println("[Board] Player (${player.name}) moved ($moves) moves from square (${currentSquare.id}) to (${targetSquare.id})")
+    }
+
+    fun movePlayerByLadder(player: Player, ladder: Ladder) {
+        val currentSquare = squares[ladder.start - 1]
+        val targetSquare = squares[ladder.end - 1]
+        currentSquare.removePlayer(player)
+        targetSquare.addPlayer(player)
+        println("[Board] Player (${player.name}) moved by ladder from square (${currentSquare.id}) to (${targetSquare.id})")
     }
 }

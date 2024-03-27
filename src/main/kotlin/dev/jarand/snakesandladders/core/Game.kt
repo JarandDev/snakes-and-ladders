@@ -1,10 +1,8 @@
 package dev.jarand.snakesandladders.core
 
-class Game(squareCount: Int, playerCount: Int) {
+class Game(private val board: Board, private val players: List<Player>) {
 
-    private val board = Board(squares = (1..squareCount).map { Square(id = it, players = mutableListOf()) })
     private val dice = Dice()
-    private val players = (1..playerCount).map { Player(name = "Player $it") }
     private var state = GameState.INITIALIZED
     private var rounds = 0
 
@@ -43,6 +41,8 @@ class Game(squareCount: Int, playerCount: Int) {
         players.forEach { player ->
             val moves = dice.roll()
             board.movePlayer(player = player, moves = moves)
+            val square = board.getSquare(player = player)
+            square.ladder?.let { board.movePlayerByLadder(player = player, ladder = it) }
         }
     }
 
