@@ -1,8 +1,7 @@
 package dev.jarand.snakesandladders.core
 
-class Game(private val board: Board, private val players: List<Player>) {
+class Game(private val board: Board, private val dice: Dice, private val players: List<Player>) {
 
-    private val dice = Dice()
     private var state = GameState.INITIALIZED
     private var rounds = 0
 

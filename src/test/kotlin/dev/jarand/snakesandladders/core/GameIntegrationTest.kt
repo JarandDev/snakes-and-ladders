@@ -12,7 +12,7 @@ class GameIntegrationTest {
 
     @BeforeEach
     fun setup() {
-        game = Game(board = BoardGenerator(squareCount = 100).generate(), players = PlayerGenerator(playerCount = 2).generate())
+        game = Game(board = BoardGenerator(squareCount = 100).generate(), dice = Dice(), players = PlayerGenerator(playerCount = 2).generate())
     }
 
     @Test
