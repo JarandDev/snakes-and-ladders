@@ -42,6 +42,7 @@ class Game(private val board: Board, private val dice: Dice, private val players
             board.movePlayer(player = player, moves = moves)
             val square = board.getSquare(player = player)
             square.ladder?.let { board.movePlayerByLadder(player = player, ladder = it) }
+            square.snake?.let { board.movePlayerBySnake(player = player, snake = it) }
         }
     }
 

@@ -47,4 +47,12 @@ class Board(val squares: List<Square>) {
         targetSquare.addPlayer(player)
         println("[Board] Player (${player.name}) moved by ladder from square (${currentSquare.id}) to (${targetSquare.id})")
     }
+
+    fun movePlayerBySnake(player: Player, snake: Snake) {
+        val currentSquare = squares[snake.start - 1]
+        val targetSquare = squares[snake.end - 1]
+        currentSquare.removePlayer(player)
+        targetSquare.addPlayer(player)
+        println("[Board] Player (${player.name}) moved by snake from square (${currentSquare.id}) to (${targetSquare.id})")
+    }
 }

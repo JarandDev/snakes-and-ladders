@@ -1,6 +1,6 @@
 package dev.jarand.snakesandladders.core
 
-class Square(val id: Int, val players: MutableList<Player>, val ladder: Ladder?) {
+class Square(val id: Int, val players: MutableList<Player>, val ladder: Ladder?, val snake: Snake?) {
 
     fun addPlayer(player: Player) {
         players.add(player)
@@ -16,5 +16,9 @@ class Square(val id: Int, val players: MutableList<Player>, val ladder: Ladder?)
 
     fun hasLadder(): Boolean {
         return ladder != null
+    }
+
+    fun hasSnake(): Boolean {
+        return snake != null
     }
 }

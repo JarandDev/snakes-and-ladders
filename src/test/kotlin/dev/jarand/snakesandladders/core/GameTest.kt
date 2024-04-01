@@ -17,8 +17,10 @@ class GameTest {
     private lateinit var startSquareMock: Square
     private lateinit var secondSquareMock: Square
     private lateinit var thirdSquareMock: Square
+    private lateinit var fourthSquareMock: Square
     private lateinit var endSquareMock: Square
     private lateinit var ladderMock: Ladder
+    private lateinit var snakeMock: Snake
     private lateinit var playerMock: Player
 
     @BeforeEach
@@ -28,9 +30,15 @@ class GameTest {
             every { end } returns 3
         }
 
+        snakeMock = mockk {
+            every { start } returns 4
+            every { end } returns 2
+        }
+
         startSquareMock = mockk {
             every { id } returns 1
             every { ladder } returns null
+            every { snake } returns null
         }
         justRun { startSquareMock.addPlayer(any()) }
         justRun { startSquareMock.removePlayer(any()) }
@@ -38,6 +46,7 @@ class GameTest {
         secondSquareMock = mockk {
             every { id } returns 2
             every { ladder } returns ladderMock
+            every { snake } returns null
         }
         justRun { secondSquareMock.addPlayer(any()) }
         justRun { secondSquareMock.removePlayer(any()) }
@@ -45,13 +54,23 @@ class GameTest {
         thirdSquareMock = mockk {
             every { id } returns 3
             every { ladder } returns null
+            every { snake } returns null
         }
         justRun { thirdSquareMock.addPlayer(any()) }
         justRun { thirdSquareMock.removePlayer(any()) }
 
-        endSquareMock = mockk {
+        fourthSquareMock = mockk {
             every { id } returns 4
             every { ladder } returns null
+            every { snake } returns snakeMock
+        }
+        justRun { fourthSquareMock.addPlayer(any()) }
+        justRun { fourthSquareMock.removePlayer(any()) }
+
+        endSquareMock = mockk {
+            every { id } returns 5
+            every { ladder } returns null
+            every { snake } returns null
             every { hasPlayers() } returns false
         }
         justRun { endSquareMock.addPlayer(any()) }
@@ -64,6 +83,7 @@ class GameTest {
         justRun { boardMock.movePlayerToStart(any()) }
         justRun { boardMock.movePlayer(any(), any()) }
         justRun { boardMock.movePlayerByLadder(any(), any()) }
+        justRun { boardMock.movePlayerBySnake(any(), any()) }
 
         diceMock = mockk()
 
@@ -86,6 +106,7 @@ class GameTest {
 
         verify(exactly = 1) { boardMock.movePlayer(player = playerMock, moves = 2) }
         verify(exactly = 0) { boardMock.movePlayerByLadder(player = playerMock, ladder = ladderMock) }
+        verify(exactly = 0) { boardMock.movePlayerBySnake(player = playerMock, snake = snakeMock) }
     }
 
     @Test
@@ -100,6 +121,22 @@ class GameTest {
 
         verify(exactly = 1) { boardMock.movePlayer(player = playerMock, moves = 1) }
         verify(exactly = 1) { boardMock.movePlayerByLadder(player = playerMock, ladder = ladderMock) }
+        verify(exactly = 0) { boardMock.movePlayerBySnake(player = playerMock, snake = snakeMock) }
+    }
+
+    @Test
+    fun `Playing round with snake should move player as expected`() {
+        every { boardMock.getSquare(player = playerMock) } returns fourthSquareMock
+        every { diceMock.roll() } returns 3
+
+        game.setup()
+        game.start()
+
+        game.playRound()
+
+        verify(exactly = 1) { boardMock.movePlayer(player = playerMock, moves = 3) }
+        verify(exactly = 1) { boardMock.movePlayerBySnake(player = playerMock, snake = snakeMock) }
+        verify(exactly = 0) { boardMock.movePlayerByLadder(player = playerMock, ladder = ladderMock) }
     }
 
     @Test
