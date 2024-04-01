@@ -32,7 +32,7 @@ class GameTest {
 
         snakeMock = mockk {
             every { start } returns 4
-            every { end } returns 2
+            every { end } returns 3
         }
 
         startSquareMock = mockk {
