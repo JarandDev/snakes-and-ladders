@@ -13,7 +13,7 @@
         <kotlin.version>2.2.20</kotlin.version>
 
         <junit.version>6.0.1</junit.version>
-        <assertj.version>3.27.6</assertj.version>
+        <assertj.version>3.27.7</assertj.version>
         <mockk.version>1.14.7</mockk.version>
 
         <surefire.version>3.5.4</surefire.version>
