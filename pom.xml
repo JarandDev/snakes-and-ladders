@@ -10,16 +10,16 @@
 
     <properties>
         <java.version>21</java.version>
-        <kotlin.version>2.2.20</kotlin.version>
+        <kotlin.version>2.3.0</kotlin.version>
 
-        <junit.version>6.0.1</junit.version>
-        <assertj.version>3.27.6</assertj.version>
-        <mockk.version>1.14.7</mockk.version>
+        <junit.version>6.0.2</junit.version>
+        <assertj.version>3.27.7</assertj.version>
+        <mockk.version>1.14.9</mockk.version>
 
         <surefire.version>3.5.4</surefire.version>
         <failsafe.version>3.5.4</failsafe.version>
         <exec.version>3.6.3</exec.version>
-        <spotless.version>3.2.0</spotless.version>
+        <spotless.version>3.2.1</spotless.version>
         <ktlint.version>1.8.0</ktlint.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
