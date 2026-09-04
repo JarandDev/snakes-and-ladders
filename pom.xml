@@ -16,10 +16,10 @@
         <assertj.version>3.27.7</assertj.version>
         <mockk.version>1.14.11</mockk.version>
 
-        <surefire.version>3.5.6</surefire.version>
-        <failsafe.version>3.5.6</failsafe.version>
+        <surefire.version>3.6.0</surefire.version>
+        <failsafe.version>3.6.0</failsafe.version>
         <exec.version>3.6.3</exec.version>
-        <spotless.version>3.9.0</spotless.version>
+        <spotless.version>3.10.1</spotless.version>
         <ktlint.version>1.8.0</ktlint.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
